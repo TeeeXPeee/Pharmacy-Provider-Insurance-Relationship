@@ -1,24 +1,19 @@
-#include <iostream>
 
-void printMenu()
-{
-    std::cout << R"( 
-    Triage : Take in new incoming prescriptions
-    Patient : Look up and access pre-existing patients
-)" << std::endl;
-}
+#include "socket.h"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
-std::string userInput;
-while(true)
-{
-    printMenu();
-    std::cin >> userInput;
+    //Initalize socket with port 27015
+    Socket socket = Socket("27015");
+    char* recievedData; 
 
-    std::cout << 'cls\n' << userInput;
+    while(true)
+    {
+        recievedData = socket.awaitInput();
 
-}
+        std::cout << recievedData;
+    }
 
 
 };
